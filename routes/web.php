@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Ruta principal
+Route::get('/', 'EmpleadoController@index');
+
+//Ruta usada para hacer todas las solicitudes del CRUD de empleados.
+Route::resource('/employees', 'EmpleadoController')->except(['index'])->names('employees');
