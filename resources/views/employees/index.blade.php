@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Lista de empleados</h1>
-        <button class="btn btn-primary">Crear</button>
+        <button id="btn-crear" class="btn btn-primary">Crear</button>
         <table id="empleados" class="display" style="width:100%">
             <thead>
                 <tr>
@@ -17,20 +17,31 @@
                 </tr>
             </thead>
             <tbody>
-
                 @foreach ($empleados as $empleado)
-                    
+                    <tr>
+                        <td>{{ $empleado->nombre }}</td>
+                        <td>{{ $empleado->email }}</td>
+                        <td>{{ $empleado->sexo }}</td>
+                        <td>{{ $empleado->area->nombre }}</td>
+                        <td>{{ $empleado->boletin }}</td>
+                        <td>Eliminar</td>
+                        <td>Modificar</td>
+                    </tr>
                 @endforeach
-                <tr>
-                    <td>Tiger Nixon</td>                    
-                </tr>
+            </tbody>
+
         </table>
+
 
     </div>
 
     <script>
         $(document).ready(function() {
             $('#empleados').DataTable();
+
+            $("#btn-crear").click(function() {
+                window.location.replace("{{route('employees.create')}}");
+            });
         });
     </script>
 @endsection

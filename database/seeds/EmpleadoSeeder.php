@@ -1,5 +1,6 @@
 <?php
 
+use App\Empleado;
 use Illuminate\Database\Seeder;
 
 class EmpleadoSeeder extends Seeder
@@ -11,6 +12,8 @@ class EmpleadoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Empleado::class, 15)->create()->each(function (Empleado $empleado){
+            $empleado->roles()->sync(rand(1,3),rand(1,3));
+        });
     }
 }
