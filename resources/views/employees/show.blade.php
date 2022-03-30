@@ -38,6 +38,8 @@
                         });
 
 
+                    }else{
+                        window.location.href = "{{ route('index') }}"
                     }
                 });
 

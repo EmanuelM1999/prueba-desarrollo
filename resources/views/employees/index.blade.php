@@ -29,9 +29,9 @@
                             <td>{{ $empleado->sexo }}</td>
                             <td>{{ $empleado->area->nombre }}</td>
                             <td>{{ $empleado->boletin ? 'Si' : 'No' }}</td>
-                            <td><a href="{{ route('employees.edit', $empleado->id) }}"><i
+                            <td><a style="color: black" href="{{ route('employees.edit', $empleado->id) }}"><i
                                         class="fa-solid fa-pen-to-square"></i></a></td>
-                            <td><a id="btn-eliminar" href="{{route('employees.show', $empleado->id)}}"><i class="fa-solid fa-trash-can"></i></a></td>
+                            <td><a style="color: black"id="btn-eliminar" href="{{route('employees.show', $empleado->id)}}"><i class="fa-solid fa-trash-can"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
