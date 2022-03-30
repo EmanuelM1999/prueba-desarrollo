@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a href="/">Volver</a>
+        <a href="/"><i class=" my-4 fa-solid fa-arrow-left-long"> Volver</i></a>
         <h1>Modificar empleado</h1>
         <div class="alert alert-primary" role="alert">
             Los campos con asteriscos (*) son obligatorios

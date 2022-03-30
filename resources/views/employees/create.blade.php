@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a href="/">Volver</a>
+        <a href="/"><i class=" my-4 fa-solid fa-arrow-left-long"> Volver</i></a>
         <h1>Crear empleado</h1>
         <div class="alert alert-primary" role="alert">
             Los campos con asteriscos (*) son obligatorios
@@ -126,7 +126,9 @@
                     type: 'POST',
                     dataType: 'json',
                     success: function(json) {
-                        swal(" ¡Usuario creado! ", " Usuario creado correctamente ", "success");
+                        swal(" ¡Usuario creado! ", " Usuario creado correctamente ", "success").then(()=>{
+                            window.location.href = "{{ route('employees.create') }}"
+                        });
                     },
                     error: function(json, xhr, status) {
                         swal(" ¡Usuario no creado! ",
