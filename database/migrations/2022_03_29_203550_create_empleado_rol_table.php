@@ -15,7 +15,7 @@ class CreateEmpleadoRolTable extends Migration
     {
         Schema::create('empleado_rol', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('empleado_id')->constrained();
+            $table->foreignId('empleado_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('rol_id');
             $table->foreign('rol_id')->references('id')->on('roles');
             $table->timestamps();

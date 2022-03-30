@@ -36,7 +36,7 @@ class EmpleadoController extends Controller
         $roles = Rol::all();
 
 
-        return view('employees.create', compact('areas','roles'));
+        return view('employees.create', compact('areas', 'roles'));
     }
 
     /**
@@ -69,7 +69,7 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-       
+        return view('employees.show', compact('id'));
     }
 
     /**
@@ -80,7 +80,7 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        $empleado = Empleado::with(['roles','area'])->findOrFail($id);
+        $empleado = Empleado::with(['roles', 'area'])->findOrFail($id);
 
         $areas = Area::all();
 
@@ -110,7 +110,7 @@ class EmpleadoController extends Controller
         ]);
 
         $empleado->roles()->sync($request->roles);
-        
+
         return $empleado;
     }
 
@@ -120,9 +120,9 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+    public function destroy($id)
     {
-        $empleado = Empleado::findOrFail($empleado->id);
+        $empleado = Empleado::findOrFail($id);
 
         $empleado->delete();
 
