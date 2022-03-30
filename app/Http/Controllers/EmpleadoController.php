@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\Empleado;
+use App\Http\Requests\StoreEmpleadoRequest;
+use App\Rol;
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -27,7 +30,12 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        return "hpol";
+        $areas = Area::all();
+
+        $roles = Rol::all();
+
+
+        return view('employees.create', compact('areas','roles'));
     }
 
     /**
@@ -36,9 +44,20 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEmpleadoRequest $request)
     {
-        //
+        $empleado = Empleado::create([
+            'nombre' => $request->nombre,
+            'email' => $request->email,
+            'sexo' => $request->sexo,
+            'descripcion' => $request->descripcion,
+            'area' => $request->area,
+            'boletin' => $request->boletin
+        ]);
+
+        $empleado->roles()->sync($request->roles);
+
+        return $empleado;
     }
 
     /**

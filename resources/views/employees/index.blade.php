@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Lista de empleados</h1>
-        <button id="btn-crear" class="btn btn-primary">Crear</button>
+        <button id="btn-crear" class="btn btn-primary"><a style="color:#f8f8f8" href="{{route('employees.create')}}">Crear</a></button>
         <table id="empleados" class="display" style="width:100%">
             <thead>
                 <tr>
@@ -38,10 +38,6 @@
     <script>
         $(document).ready(function() {
             $('#empleados').DataTable();
-
-            $("#btn-crear").click(function() {
-                window.location.replace("{{route('employees.create')}}");
-            });
         });
     </script>
 @endsection
