@@ -51,7 +51,7 @@ class EmpleadoController extends Controller
             'email' => $request->email,
             'sexo' => $request->sexo,
             'descripcion' => $request->descripcion,
-            'area' => $request->area,
+            'area_id' => $request->area_id,
             'boletin' => $request->boletin
         ]);
 
@@ -102,6 +102,10 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        //
+        $empleado = Empleado::findOrFail($empleado->id);
+
+        $empleado->delete();
+
+        return $empleado;
     }
 }

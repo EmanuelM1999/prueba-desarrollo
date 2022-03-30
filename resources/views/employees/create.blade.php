@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <a href="/">Volver</a>
         <h1>Crear empleado</h1>
         <div class="alert alert-primary" role="alert">
             Los campos con asteriscos (*) son obligatorios
@@ -101,31 +102,27 @@
                 }
 
                 if ($("#boletin").is(':checked')) {
-                    boolBoletin = true;
+                    boolBoletin = 1;
                 } else {
-                    boolBoletin = false;
+                    boolBoletin = 0;
                 }
 
                 if ($("#masculino").is(':checked')) {
-                   sexoSelecionado = 'M';
+                    sexoSelecionado = 'M';
                 } else if ($("#femenino").is(':checked')) {
                     sexoSelecionado = 'F';
-                }
-
-                let empleado = {
-                    nombre: $('#nombre').val(),
-                    email: $('#email').val(),
-                    sexo: sexoSelecionado,
-                    boletin: boolBoletin,
-                    roles: rolesTotales,
-                    area: $('#area').val(),
-                    descripcion: $('#descripcion').val()
                 }
 
                 $.ajax({
                     url: '{{ route('employees.store') }}',
                     data: {
-                        empleado
+                        nombre: $('#nombre').val(),
+                        email: $('#email').val(),
+                        sexo: sexoSelecionado,
+                        boletin: boolBoletin,
+                        roles: rolesTotales,
+                        area_id: $('#area').val(),
+                        descripcion: $('#descripcion').val()
                     },
                     type: 'POST',
                     dataType: 'json',
@@ -134,7 +131,7 @@
                     },
                     error: function(json, xhr, status) {
                         swal(" ¡Usuario no creado! ",
-                            "Complete toda la informacion y valide los datos", "error");
+                            "Complete toda la informacion y valide los datos", "error");                            
                     },
                 });
 

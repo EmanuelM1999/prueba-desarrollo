@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Lista de empleados</h1>
-        <button id="btn-crear" class="btn btn-primary"><a style="color:#f8f8f8" href="{{route('employees.create')}}">Crear</a></button>
+        <button id="btn-crear" class="btn btn-primary">Crear</button>
         <table id="empleados" class="display" style="width:100%">
             <thead>
                 <tr>
@@ -23,9 +23,9 @@
                         <td>{{ $empleado->email }}</td>
                         <td>{{ $empleado->sexo }}</td>
                         <td>{{ $empleado->area->nombre }}</td>
-                        <td>{{ $empleado->boletin }}</td>
-                        <td>Eliminar</td>
-                        <td>Modificar</td>
+                        <td>{{ $empleado->boletin ? 'Si' : 'No' }}</td>
+                        <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                        <td><button type="button" class="btn btn-warning">Modificar</button></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -39,5 +39,11 @@
         $(document).ready(function() {
             $('#empleados').DataTable();
         });
+
+        $("#btn-crear").click(function(){
+            window.location.href ="{{ route('employees.create') }}"
+        })
+
+        
     </script>
 @endsection

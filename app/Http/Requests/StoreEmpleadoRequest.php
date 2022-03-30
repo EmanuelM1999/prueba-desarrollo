@@ -29,7 +29,7 @@ class StoreEmpleadoRequest extends FormRequest
             'sexo' => ['required','string'],
             'descripcion' => ['required','string'],
             'boletin' => ['required', 'boolean'],
-            'area' => ['required', 'array']
+            'area_id' => ['required']
         ];
     }
 }
