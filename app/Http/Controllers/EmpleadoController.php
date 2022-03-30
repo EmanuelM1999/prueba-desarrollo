@@ -91,7 +91,20 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, Empleado $empleado)
     {
-        //
+        $empleado = Empleado::findOrFail($empleado->id);
+
+        $empleado->update([
+            'nombre' => $request->nombre,
+            'email' => $request->email,
+            'sexo' => $request->sexo,
+            'descripcion' => $request->descripcion,
+            'area_id' => $request->area_id,
+            'boletin' => $request->boletin
+        ]);
+
+        $empleado->roles()->sync($request->roles);
+        
+        return $empleado;
     }
 
     /**
