@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Empleado;
 use App\Http\Requests\StoreEmpleadoRequest;
+use App\Http\Requests\UpdateEmpleadoRequest;
 use App\Rol;
 use Illuminate\Http\Request;
 
@@ -68,13 +69,7 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        $empleado = Empleado::with(['roles','area'])->findOrFail($id);
-
-        $areas = Area::all();
-
-        $roles = Rol::all();
-
-        return view('employees.show', compact(['empleado', 'roles', 'areas']));
+       
     }
 
     /**
@@ -83,9 +78,15 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit($id)
     {
-        //
+        $empleado = Empleado::with(['roles','area'])->findOrFail($id);
+
+        $areas = Area::all();
+
+        $roles = Rol::all();
+
+        return view('employees.edit', compact(['empleado', 'roles', 'areas']));
     }
 
     /**
@@ -95,9 +96,9 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(UpdateEmpleadoRequest $request,  $id)
     {
-        $empleado = Empleado::findOrFail($empleado->id);
+        $empleado = Empleado::findOrFail($id);
 
         $empleado->update([
             'nombre' => $request->nombre,
