@@ -55,9 +55,9 @@ class EmpleadoController extends Controller
             'boletin' => $request->boletin
         ]);
 
-        $empleado->roles()->sync($request->roles);
+        $empleado->roles()->attach($request->roles);
 
-        return $empleado;
+        return $request->roles;
     }
 
     /**
@@ -66,9 +66,15 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function show(Empleado $empleado)
+    public function show($id)
     {
-        //
+        $empleado = Empleado::with(['roles','area'])->findOrFail($id);
+
+        $areas = Area::all();
+
+        $roles = Rol::all();
+
+        return view('employees.show', compact(['empleado', 'roles', 'areas']));
     }
 
     /**

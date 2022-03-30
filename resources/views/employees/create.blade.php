@@ -9,37 +9,41 @@
         </div>
 
         <form id="form" action="">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nombre completo * </label>
+            <div class="form-group row my-4">
+                <label class="fw-bold col-sm-2 col-form-label">Nombre completo * </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="nombre">
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Email * </label>
+            <div class="form-group row my-4">
+                <label class="fw-bold col-sm-2 col-form-label">Email * </label>
                 <div class="col-sm-10">
                     <input type="email" class="form-control" id="email">
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Sexo * </label>
+            <div class="form-group row my-4">
+                <label class="fw-bold col-sm-2 col-form-label">Sexo * </label>
                 <div class="col-sm-10">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="masculino">
-                        <label class="custom-control-label">Masculino</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="masculino">
+                        <label class="form-check-label" for="masculino">
+                            Masculino
+                        </label>
                     </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="femenino">
-                        <label class="custom-control-label">Femenino</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="femenino">
+                        <label class="form-check-label" for="femenino">
+                            Femenino
+                        </label>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Area * </label>
+            <div class="form-group row my-4">
+                <label class=" fw-bold col-sm-2 col-form-label">Area * </label>
                 <div class="col-sm-10">
-                    <select class="custom-select" id="area">
+                    <select class="form-select" id="area">
                         @foreach ($areas as $area)
                             <option id="{{ 'area' . $area->id }}" value="{{ $area->id }}">{{ $area->nombre }}
                             </option>
@@ -48,38 +52,33 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Descripcion * </label>
+            <div class="form-group row my-4">
+                <label class="fw-bold col-sm-2 col-form-label">Descripcion * </label>
                 <div class="col-sm-10">
                     <textarea class="form-control" id="descripcion"></textarea>
-                </div>
-            </div>
-
-            <div class="form-group row ">
-                <div class="col-sm-10">
-                    <div class="custom-control custom-checkbox">
+                    <div class="custom-control custom-checkbox my-4">
                         <input type="checkbox" class="custom-control-input" id="boletin">
                         <label class="custom-control-label">Deseo recibir boletin informativo</label>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Roles * </label>
+            <div class="form-group row my-4">
+                <label class="fw-bold col-sm-2 col-form-label">Roles * </label>
                 <div class="col-sm-10">
                     @foreach ($roles as $rol)
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="{{ 'rol' . $rol->id }}"
-                                value="{{ 'rol' . $rol->id }}">
-                            <label class="custom-control-label" for="customCheckDisabled">{{ $rol->nombre }}</label>
+                                value="{{ 'rol' . $rol->id }}" name="{{ 'rol' . $rol->id }}">
+                            <label class="custom-control-label" for="{{ 'rol' . $rol->id }}">{{ $rol->nombre }}</label>
                         </div>
                     @endforeach
-
+                    <button type="submit" id="" class="btn btn-primary my-4">Guardar</button>
 
                 </div>
             </div>
 
-            <button type="submit" id="" class="btn btn-primary">Guardar</button>
+
 
         </form>
     </div>
@@ -93,7 +92,7 @@
                 let rolesTotales = [],
                     boolBoletin, sexoSelecionado;
 
-                for (let index = 1; index < {{ $roles->count() }}; index++) {
+                for (let index = 1; index <= {{ $roles->count() }}; index++) {
 
                     if ($("#rol" + index).is(':checked')) {
                         rolesTotales.push(index);
@@ -131,7 +130,7 @@
                     },
                     error: function(json, xhr, status) {
                         swal(" ¡Usuario no creado! ",
-                            "Complete toda la informacion y valide los datos", "error");                            
+                            "Complete toda la informacion y valide los datos", "error");
                     },
                 });
 
